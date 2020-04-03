@@ -9,12 +9,14 @@ usersRouter.get("/", async (request, response) => {
 });
 
 usersRouter.get("/:id", async (request, response) => {
-  const user = await User.findById(request.params.id).populate("blogs", {
-    title: 1,
-    author: 1,
-    url: 1,
-    likes: 1
-  });
+  const user = await User.findById(request.params.id)
+    .populate("blogs", {
+      title: 1,
+      author: 1,
+      url: 1,
+      likes: 1
+    })
+    .populate("comments");
   response.json(user.toJSON());
 });
 
@@ -28,7 +30,8 @@ usersRouter.post("/", async (request, response) => {
     username: body.username,
     name: body.name,
     passwordHash,
-    likes: []
+    likes: [],
+    comments: []
   });
   const savedUser = await user.save();
   const savedUserForToken = {

@@ -10,10 +10,11 @@ const blogSchema = mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId
     }
   ],
+  noOfComments: Number,
   comments: [
     {
       comment: String,
-      user: {
+      byUser: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
       }
