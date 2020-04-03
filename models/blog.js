@@ -7,8 +7,16 @@ const blogSchema = mongoose.Schema({
   likes: Number,
   likedBy: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      type: mongoose.Schema.Types.ObjectId
+    }
+  ],
+  comments: [
+    {
+      comment: String,
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+      }
     }
   ],
   user: {

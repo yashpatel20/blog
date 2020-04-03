@@ -12,7 +12,7 @@ const getTokenFrom = request => {
 };
 
 blogRouter.get("/", async (request, response) => {
-  const blogs = await Blog.find({}).populate("user", { username: 1, name: 1 });
+  const blogs = await Blog.find({});
   response.json(blogs.map(blog => blog.toJSON()));
 });
 
@@ -44,7 +44,7 @@ blogRouter.get("/:id", async (request, response) => {
   if (!token || !decodedToken.id) {
     return response.status(401).json({ error: "token missing or invalid" });
   }
-  const blog = await Blog.findById(request.params.id);
+  const blog = await Blog.findById(request.params.id).populate("user");
   if (blog) response.json(blog.toJSON());
   else response.status(404).end();
 });
@@ -66,6 +66,7 @@ blogRouter.put("/like/:id", async (request, response) => {
     return response.status(401).json({ error: "token missing or invalid" });
   }
   const user = await User.findById(decodedToken.id);
+  const findBlog = await Blog.findById();
   const blog = {
     ...request.body,
     likedBy: [...request.body.likedBy]

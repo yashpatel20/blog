@@ -10,8 +10,13 @@ const userSchema = new mongoose.Schema({
   passwordHash: String,
   likes: [
     {
+      type: mongoose.Schema.Types.ObjectId
+    }
+  ],
+  comments: [
+    {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Blog"
+      ref: "User"
     }
   ],
   blogs: [
