@@ -60,6 +60,10 @@ blogRouter.delete("/:id", async (request, response) => {
     return response.status(401).json({ error: "token missing or invalid" });
   }
   await Blog.findByIdAndRemove(request.params.id);
+  const user = await User.findById(decodedToken.id);
+  const newBlogs = user.blogs.filter(blog => blog.id !== request.params.id);
+  user.blogs = newBlogs;
+  await user.save();
   response.status(204).end();
 });
 
@@ -70,7 +74,6 @@ blogRouter.put("/like/:id", async (request, response) => {
     return response.status(401).json({ error: "token missing or invalid" });
   }
   const user = await User.findById(decodedToken.id);
-  const findBlog = await Blog.findById();
   const blog = {
     ...request.body,
     likedBy: [...request.body.likedBy]

@@ -14,7 +14,8 @@ usersRouter.get("/:id", async (request, response) => {
       title: 1,
       author: 1,
       url: 1,
-      likes: 1
+      likes: 1,
+      noOfComments: 1
     })
     .populate("comments");
   response.json(user.toJSON());
