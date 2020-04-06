@@ -1,7 +1,8 @@
-FROM node:12-alpine
-WORKDIR /usr/src/app
-COPY package*.json ./
+FROM alpine:latest
+RUN apk add --no-cache nodejs npm
+WORKDIR /app
+COPY . /app
 RUN npm install
-COPY . .
 EXPOSE $PORT
-CMD [ "npm", "run", "dev" ]
+ENTRYPOINT ["cross-env" ,"NODE_ENV=development", "nodemon"]
+CMD ["index.js"]
