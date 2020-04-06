@@ -4,4 +4,5 @@ WORKDIR /app
 COPY . /app
 RUN npm install
 EXPOSE $PORT
-CMD ["npm","run","dev"]
+ENTRYPOINT ["nodemon"]
+CMD ["index.js"]
