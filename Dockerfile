@@ -4,5 +4,4 @@ WORKDIR /app
 COPY . /app
 RUN npm install
 EXPOSE $PORT
-ENTRYPOINT ["cross-env" ,"NODE_ENV=development", "nodemon"]
-CMD ["index.js"]
+CMD ["npm","run","dev"]
