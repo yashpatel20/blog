@@ -1,3 +1,7 @@
+setup:
+  config:
+    MONGODB_URI: mongodb+srv://fullstack:Yhp%401997@cluster0-umicp.mongodb.net/Blog?retryWrites=true&w=majority
+    PORT: 3001
 build:
   docker:
     web: Dockerfile
