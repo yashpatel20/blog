@@ -12,6 +12,13 @@ cd blog
 npm install
 ```
 
+Create a dotenv file with MONGODB_URI and PORT config vars
+
+```bash
+cd blog
+nano .env
+```
+
 ## Usage
 
 The production api is hosted on https://fierce-shelf-61065.herokuapp.com/api/blogs .
